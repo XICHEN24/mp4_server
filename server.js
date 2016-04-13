@@ -201,6 +201,7 @@ router.route('/tasks')
 router.route('/users/:user_id')
 	.get(function(req,res){
 		User.findById(req.params.user_id, function(err, user){
+			//console.log(user);
 			if(err){
 				//console.log(err.name);
 				//res.send(err);
@@ -241,15 +242,18 @@ router.route('/users/:user_id')
 		});
 	})
 	.delete(function(req, res){
+		//console.log(req)
 		User.remove({
 			_id: req.params.user_id
 		}, function(err, user){
-			console.log(user.domian);
+			//console.log(req.params.user_id);
+			
 			if(err){
 				res.status(500).send({message:'Something broke!',data:[]});
 				//res.status(404).send({message:"Sorry, we cannot find that",data:[]});
 			}
-			else if(user.domain == undefined){
+			//else if (User.isNullOrUndefined){
+			else if(User == undefined){
 				res.status(404).send({message:"Sorry, we cannot find that",data:[]});
 			}
 			else{	//res.send(err);
