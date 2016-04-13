@@ -55,7 +55,7 @@ userRoute.post(function(req,res){
 	var user = new User();
 	user.name = req.body.name;
 	user.email = req.body.email;
-	user.pendingTasks = req.body.pendingTasks;
+	//user.pendingTasks = req.body.pendingTasks;
 	user.dateCreated = new Date().toISOString();
 
 	user.save(function(err){
@@ -244,9 +244,13 @@ router.route('/users/:user_id')
 		User.remove({
 			_id: req.params.user_id
 		}, function(err, user){
+			console.log(user.domian);
 			if(err){
 				res.status(500).send({message:'Something broke!',data:[]});
 				//res.status(404).send({message:"Sorry, we cannot find that",data:[]});
+			}
+			else if(user.domain == undefined){
+				res.status(404).send({message:"Sorry, we cannot find that",data:[]});
 			}
 			else{	//res.send(err);
 				res.json({message: 'Successfully deleted',data:[]});
@@ -319,6 +323,9 @@ router.route('/tasks/:task_id')
 				//res.send(err);
 				res.status(500).send({message:'Something broke!',data:[]});
 				//res.status(404).send({message:"Sorry, we cannot find that",data:[]});
+			}
+			else if(task.domain == undefined){
+				res.status(404).send({message:"Sorry, we cannot find that",data:[]});
 			}
 			else{	//res.send(err);
 				res.json({message: 'Successfully deleted',data:[]});

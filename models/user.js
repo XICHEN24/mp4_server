@@ -7,7 +7,7 @@ var UserSchema   = new mongoose.Schema({
   //email: String,
   name: {type: String, required: [true, 'A name is required! ']},
   email: {type: String, required: [true, 'An email is required! '], unique: true},
-  pendingTasks: [String],
+  pendingTasks: {type:[String],default: []},
   dateCreated: Date
 });
 
