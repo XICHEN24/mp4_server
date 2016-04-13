@@ -249,15 +249,17 @@ router.route('/users/:user_id')
 			//console.log(req.params.user_id);
 			
 			if(err){
-				res.status(500).send({message:'Something broke!',data:[]});
+				res.send(err);
+				//res.status(500).send({message:'Something broke!',data:[]});
 				//res.status(404).send({message:"Sorry, we cannot find that",data:[]});
 			}
+			
 			//else if (User.isNullOrUndefined){
-			else if(User == undefined){
+			else if(user.result.n == 0){
 				res.status(404).send({message:"Sorry, we cannot find that",data:[]});
 			}
 			else{	//res.send(err);
-				res.json({message: 'Successfully deleted',data:[]});
+				res.json({message: 'Successfully deleted',data:user});
 			}
 		});
 	});
@@ -269,7 +271,7 @@ router.route('/tasks/:task_id')
 				res.status(500).send({message:'Something broke!',data:[]});
 				//res.status(404).send({message:"Sorry, we cannot find that",data:[]});
 			}
-			else if(task == undefined){
+			else if(task.result.n === 0){
 				res.status(404).send({message:"Sorry, we cannot find that",data:[]});
 			}
 			else{
