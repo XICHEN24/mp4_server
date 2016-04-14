@@ -271,7 +271,7 @@ router.route('/tasks/:task_id')
 				res.status(500).send({message:'Something broke!',data:[]});
 				//res.status(404).send({message:"Sorry, we cannot find that",data:[]});
 			}
-			else if(task.result.n === 0){
+			else if(task == undefined){
 				res.status(404).send({message:"Sorry, we cannot find that",data:[]});
 			}
 			else{
@@ -315,7 +315,7 @@ router.route('/tasks/:task_id')
 					res.status(500).send({message:'Something broke!',data:[]});
 				}	
 				else{
-						res.json({message: 'User updated!', data:task});
+						res.json({message: 'Task updated!', data:task});
 				}	//res.send(err);
 					
 			});
@@ -330,7 +330,7 @@ router.route('/tasks/:task_id')
 				res.status(500).send({message:'Something broke!',data:[]});
 				//res.status(404).send({message:"Sorry, we cannot find that",data:[]});
 			}
-			else if(task.domain == undefined){
+			else if(task.result.n == 0){
 				res.status(404).send({message:"Sorry, we cannot find that",data:[]});
 			}
 			else{	//res.send(err);
